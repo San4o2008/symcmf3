@@ -1,13 +1,4 @@
-api_category:
-    type:     rest
-    resource: PageBundle\Controller\CategoryController
+api:
+    resource: '@PageBundle/Controller/'
+    type: annotation
     prefix: /api
-    defaults:
-        _format: json
-
-api_article:
-    type:     rest
-    resource: PageBundle\Controller\ArticleController
-    prefix: /api
-    defaults:
-        _format: json
