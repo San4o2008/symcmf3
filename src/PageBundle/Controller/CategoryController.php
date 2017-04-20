@@ -350,10 +350,11 @@ class CategoryController extends BaseController
     /**
      *
      * @Route("/category", name="post_category")
+     * @Method("POST")
      *
      * @return Response
      */
-    public function postCategory()
+    public function postCategoryAction()
     {
         return $this->postEntity();
     }
@@ -388,7 +389,7 @@ class CategoryController extends BaseController
      *
      * @return Response
      */
-    public function putCategory($id)
+    public function putCategoryAction($id)
     {
         return $this->putEntity($id);
     }
