@@ -1,6 +1,6 @@
 <?php
 
-namespace JsonBundle\Article;
+namespace JsonApiBundle\Article;
 
 use PageBundle\Entity\Article;
 use JsonApiBundle\Services\BaseHydrator;
