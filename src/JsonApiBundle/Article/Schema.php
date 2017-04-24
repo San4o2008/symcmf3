@@ -33,7 +33,7 @@ class Schema extends SchemaProvider
         /** @var Article $article */
         return [
             'title' => $article->getTitle(),
-            'description' => $article->getDescription(),
+            'description' => $article->getContent(),
         ];
     }
 
