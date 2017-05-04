@@ -23,14 +23,6 @@ class LoadAdmin extends AbstractLoad
     protected function createObject($object)
     {
         $user = new User();
-        $userRole = new UserRole();
-        $userRole->setUser($user);
-        $userRole->setRole($this->adminRole);
-
-        /** @var ObjectManager $em*/
-        $em = $this->container->get('doctrine')->getManager();
-        $em->persist($userRole);
-        $em->flush();
 
         $encoder = $this->container->get('security.password_encoder');
 
@@ -41,7 +33,6 @@ class LoadAdmin extends AbstractLoad
 
         $user->setPassword($password);
         $user->setActivated(true);
-        $user->addRole($userRole);
 
         return $user;
     }
