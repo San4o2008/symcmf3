@@ -13,19 +13,16 @@ use Doctrine\Common\Persistence\ObjectManager;
  */
 class LoadUserRole extends AbstractLoad
 {
-    /** @var ObjectManager $manager */
-    private $manager;
-
     /**
-     * @param $object
+     * @param array $data
      *
      * @return mixed
      */
-    protected function createObject($object)
+    protected function createObject($data)
     {
         $userRole = new UserRole();
-        $userRole->setUser($object['user']);
-        $userRole->setRole($object['role']);
+        $userRole->setUser($data['user']);
+        $userRole->setRole($data['role']);
 
         return $userRole;
     }
@@ -35,11 +32,12 @@ class LoadUserRole extends AbstractLoad
      */
     protected function getObjects()
     {
-        $this->manager = $this->container->get('doctrine')->getManager();
+        /** @var ObjectManager $em */
+        $em = $this->container->get('doctrine')->getManager();
         /** @var User $user */
-        $user = $this->manager->getRepository(User::class)->findOneBy(['email' => User::$admin['email']]);
+        $user = $em->getRepository(User::class)->findOneBy(['email' => User::$admin['email']]);
         /** @var Role $user */
-        $role = $this->manager->getRepository(Role::class)->findOneBy(['role' => Role::$adminRole['role']]);
+        $role = $em->getRepository(Role::class)->findOneBy(['role' => Role::$adminRole['role']]);
 
         $data = ['user' => $user, 'role' => $role];
 
@@ -48,15 +46,15 @@ class LoadUserRole extends AbstractLoad
 
     /**
      * @param ObjectManager $manager
-     * @param $object
+     * @param array $data
      *
      * @return mixed
      */
-    protected function find(ObjectManager $manager, $object)
+    protected function find(ObjectManager $manager, $data)
     {
        return $manager->getRepository(UserRole::class)->findOneBy([
-           'user' => $object['user'],
-           'role' => $object['role']
+           'user' => $data['user'],
+           'role' => $data['role']
        ]);
     }
 }
